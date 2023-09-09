@@ -1,0 +1,23 @@
+﻿@using TestWebApplication.Selenium;
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+@inject WeatherFinder jsonFileWeather
+
+<div>
+    @foreach(Weather weather in jsonFileWeather.GetWeather())
+    {
+        <div>
+            @weather.Day
+        </div>
+        <div>
+            @weather.TempatureMax
+        </div>
+        <div>
+            @weather.TempatureMin
+        </div>
+
+    }
+</div>
+<div>lol</div>
