@@ -10,7 +10,7 @@ builder.Services.AddHostedService<BackgroundWork>();
 builder.Services.AddTransient<WeatherFinder>();
 
 var app = builder.Build();
-app.Urls.Add("http://45.14.224.110:5024");
+//app.Urls.Add("http://45.14.224.110:5024");
 app.Urls.Add("http://localhost:5024");
 
 
@@ -33,4 +33,5 @@ app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Index}/{id?}");
 
+Console.WriteLine("Started running app");
 app.Run();

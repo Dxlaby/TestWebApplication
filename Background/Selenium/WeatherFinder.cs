@@ -8,6 +8,8 @@ using System.Text.Json.Serialization;
 using Microsoft.AspNetCore.Hosting.Server;
 //using Newtonsoft.Json;
 using System.IO;
+using OpenQA.Selenium.Firefox;
+using Microsoft.Extensions.Options;
 
 namespace TestWebApplication.Selenium
 {
@@ -16,9 +18,10 @@ namespace TestWebApplication.Selenium
         
         public void FindWeather() 
         {
-            var chromeOptions = new ChromeOptions();
-            chromeOptions.AddArgument("--headless");
-            var driver = new ChromeDriver(chromeOptions);
+            var firefoxOptions = new FirefoxOptions();
+            firefoxOptions.AddArgument("--headless");
+            firefoxOptions.AddArgument("no-sandbox");
+            var driver = new FirefoxDriver(@"wwwroot/Drivers/geckodriver", firefoxOptions);
 
             driver.Navigate().GoToUrl("https://vclock.com/time/");
             var weatherDays = driver.FindElements(By.CssSelector(".panel.panel-default.panel-heading-fullwidth"));
@@ -43,14 +46,14 @@ namespace TestWebApplication.Selenium
 
             driver.Close();
             string json = System.Text.Json.JsonSerializer.Serialize(weatherData);
-            File.WriteAllText(@"D:\Programovani\WebApps\TestWebApplication\wwwroot\Data\WeatherData.json", json);
+            File.WriteAllText(@"wwwroot/Data/WeatherData.json", json);
 
             //https://stackoverflow.com/questions/16921652/how-to-write-a-json-file-in-c
         }
 
         public IEnumerable<Weather> GetWeather()
         {
-            string json = File.ReadAllText(@"D:\Programovani\WebApps\TestWebApplication\wwwroot\Data\WeatherData.json");
+            string json = File.ReadAllText(@"wwwroot/Data/WeatherData.json");
             IEnumerable<Weather> weatherForecast = JsonSerializer.Deserialize<IEnumerable<Weather>>(json);
             if (weatherForecast != null)
             {

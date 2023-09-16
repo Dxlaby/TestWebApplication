@@ -19,6 +19,7 @@ namespace TestWebApplication.Background
                 weatherFounder.FindWeather();
                 await Task.Delay(TimeSpan.FromMinutes(1));
             }
+            
         }
 
     }

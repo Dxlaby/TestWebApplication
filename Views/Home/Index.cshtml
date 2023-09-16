@@ -3,10 +3,10 @@
     ViewData["Title"] = "Home Page";
 }
 
-@inject WeatherFinder jsonFileWeather
+@inject WeatherFinder weatherFinder
 
 <div>
-    @foreach(Weather weather in jsonFileWeather.GetWeather())
+    @foreach (Weather weather in weatherFinder.GetWeather())
     {
         <div>
             @weather.Day
